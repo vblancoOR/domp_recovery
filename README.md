@@ -23,4 +23,4 @@ where:
 
 ## Extract Results:
     
-    domp_solver.solution_info])
+    domp_solver.solution_info
