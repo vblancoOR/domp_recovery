@@ -15,6 +15,7 @@ where:
     - alpha: for "cent", is the parameter alpha, for "ksum", alpha represent the percent of first observations that are accounted.
     - p: number of clusters to be computed.
     - time_limit: time_limit for solving the model
+    - relax: True if the LP is solved, False if the IP.
 
 ## Solve the model
 
@@ -23,4 +24,17 @@ where:
 
 ## Extract Results:
     
+    domp_solver.solution_info
+
+## Example
+
+    file = "synth_data/synth_data/instance_n10_m2_s0_d2_o00_0.txt"
+    method = "cent"
+    alpha=0.5
+    p=2
+    time_limit=3600
+    relax=False
+
+    domp_solver = DOMP(file, method, time_limit, relax, p, alpha)
+    domp_solver.solve_BEP()
     domp_solver.solution_info
