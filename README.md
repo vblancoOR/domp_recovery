@@ -28,6 +28,12 @@ where:
 
 ## Example
 
+    
+
+    ```python
+    from domp_f import *
+
+
     file = "synth_data/synth_data/instance_n10_m2_s0_d2_o00_0.txt"
     method = "cent"
     alpha=0.5
