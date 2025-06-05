@@ -30,7 +30,8 @@ where:
 
     
 
-    ```python
+```python
+
     from domp_f import *
 
 
@@ -44,3 +45,9 @@ where:
     domp_solver = DOMP(file, method, time_limit, relax, p, alpha)
     domp_solver.solve_BEP()
     domp_solver.solution_info
+````
+
+**Example Output:**
+
+
+
