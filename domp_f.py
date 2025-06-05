@@ -50,9 +50,11 @@ class DOMP:
             "method": self.method,
             "n": self.n,
             "relax": self.relax,
+            "alpha": self.alpha,
+            "outliers": int(self.file[-8:-6]),
             "CPUTime": model.Runtime,
-            "ObjVal": model.ObjVal if model.status != gp.GRB.INFEASIBLE else None,
-            "MIPGap":  0 if self.relax else model.MIPGap,
+            "ObjVal": self.obj,
+            "MIPGap":  0 if self.relax else self.gap,
             "LPRelaxation at Root": model._lproot,
             "Work": model.getAttr(gp.GRB.Attr.Work),
             "NodeCount": model.NodeCount,
@@ -121,9 +123,19 @@ class DOMP:
         model._lproot=0
         model.Params.OutputFlag=1
         model.optimize(lproot)
-        
-        self.Y = model.getAttr("X", y)
-        self.Z = model.getAttr("X", x)
+
+        if model.Status!=gp.GRB.INFEASIBLE:
+            self.Y = model.getAttr("X", y)
+            self.Z = model.getAttr("X", x)
+            self.obj=model.ObjVal
+            if self.relax==False:
+                self.gap=model.MIPGap
+        else:
+            self.Y={}
+            self.Z={}
+            self.obj=None
+            self.gap=None
+
 
         self._extract_solution_info(model)
 
